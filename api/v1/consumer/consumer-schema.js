@@ -40,6 +40,11 @@ const findAll = {
         city: Joi
             .string()
             .max(100)
+            .trim(),
+        name_in: Joi
+            .string()
+            .min(1)
+            .max(300)
             .trim()
     })
 };

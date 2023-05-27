@@ -1,5 +1,6 @@
 const data = [];
 const ConsumerModel = require('./consumer-model')
+const {Op} = require('sequelize');
 
 const save = (consumer) => {
 
@@ -23,7 +24,11 @@ const findAll = async (options) => {
         offset,
         where: {
             ...(filter.name ? {name: filter.name} : {}),
-            ...(filter.city ? {city: filter.city} : {})
+            ...(filter.city ? {city: filter.city} : {}),
+            ...(filter.name_in ? {
+                name: {
+                    [Op.in]: filter.name_in.split(',')
+                }}:{})
         }
     })
     return result;
